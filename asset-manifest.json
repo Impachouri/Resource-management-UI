@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Resource-management-UI/static/css/main.610ee209.css",
+    "main.js": "/Resource-management-UI/static/js/main.f1844c92.js",
+    "index.html": "/Resource-management-UI/index.html",
+    "main.610ee209.css.map": "/Resource-management-UI/static/css/main.610ee209.css.map",
+    "main.f1844c92.js.map": "/Resource-management-UI/static/js/main.f1844c92.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.610ee209.css",
+    "static/js/main.f1844c92.js"
+  ]
+}
