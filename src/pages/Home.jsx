@@ -276,9 +276,107 @@ const Home = () => {
         }
     ]
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [activeTab, setActiveTab] = useState('');
+    const itemsPerPage = 6;
+
+    const activeData = cardsData.filter(card =>
+        card.tag.toLowerCase().includes(activeTab)
+    )
+
+    const filteredData = activeData.filter(card =>
+        card.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+    const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const handleSearch = event => {
+        const { value } = event.target;
+        setSearchQuery(value);
+        setCurrentPage(1);
+    };
+
+
+    useEffect(() => {
+        console.log(activeTab)
+    }, [activeTab])
+
     return (
-        <div className="h-full w-full px-[10%] py-[3%] text-black gap-7">
-            Home
+        <div className="h-full w-full px-[10%] py-[3%] text-heading flex  flex-col gap-7">
+            {/* User tab */}
+            <div className="w-full h-12 flex items-center justify-center">
+                <div className="w-[60%] h-full flex border border-borderColor rounded-md font-semibold text-xl">
+                    <button onClick={() => setActiveTab('')} className={`h-full flex-1 p-2 border-r border-borderColor rounded-l-md ${activeTab === "" ? "bg-secnodaryButton text-white" : "bg-[#D7DFE93D]"} `}>
+                        Resource
+                    </button>
+                    <button onClick={() => setActiveTab('request')} className={`h-full flex-1 p-2 border-r border-borderColor  ${activeTab === "request" ? "bg-secnodaryButton text-white" : "bg-[#D7DFE93D]"}`}>
+                        Request
+                    </button>
+                    <button onClick={() => setActiveTab('user')} className={`h-full flex-1 p-2 ${activeTab === "user" ? "bg-secnodaryButton text-white" : "bg-[#D7DFE93D]"}`}>
+                        User
+                    </button>
+                </div>
+            </div>
+            {/* Search bar */}
+            <div className="w-full h-10">
+                <div className="h-full w-1/2">
+                    <label className="relative block">
+                        <span className="sr-only">Search</span>
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <svg className="h-5 w-5 fill-slate-300" viewBox="0 0 20 20"><path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"
+                            />
+                                {/* <img src="search.svg" alt="search" /> */}
+                            </svg>
+                        </span>
+                        <input value={searchQuery}
+                            onChange={handleSearch} className=" placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm sm:text-lg" placeholder="Search" type="text" name="search" />
+                    </label>
+                </div>
+            </div>
+            {/* Resource tab */}
+            <div className="w-full grid grid-cols-2 md:grid-cols-3  gap-9">
+                {currentItems.map((card, id) =>
+                    <Card key={id} card={card} />
+                )}
+            </div>
+            <div className="flex items-center justify-center w-full mt-4 gap-10">
+                <button
+                    onClick={handlePreviousPage}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 border border-gray-300 rounded-md"
+                >
+                    Previous
+                </button>
+                <span>{currentPage} / {totalPages}</span>
+                <button
+                    onClick={handleNextPage}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 border border-gray-300 rounded-md"
+                >
+                    Next
+                </button>
+            </div>
         </div>
     )
 }

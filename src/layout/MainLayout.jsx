@@ -4,7 +4,7 @@ import Navbar from "../component/Navbar"
 const MainLayout = () => {
     return <>
         <Navbar />
-        <main className="h-[90%] w-full">
+        <main className="md:h-[90%] w-full bg-[#FBFBFB] font-grotesk">
             <Outlet />
         </main>
     </>
