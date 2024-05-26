@@ -4,7 +4,6 @@ import notification from '../utils/notification';
 import { ApiContext } from '../context/context';
 import { fetchDataApi } from '../service/apiService';
 import Loading from "../utils/loading";
-// import { fakeApi } from "../utils/fakeApi";
 
 const Home = () => {
 
@@ -17,17 +16,11 @@ const Home = () => {
 
     useEffect(() => {
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const fetchData = () => {
         apiDispatch({ type: "REQUEST" });
-        // fakeApi().then((response) => {
-        //     apiDispatch({ type: "SUCCESS", payload: response })
-        //     notify(response, "SUCCESS");
-        // }).catch((error) => {
-        //     apiDispatch({ type: "ERROR", payload: error })
-        //     notify('Error in Loading Data, Please try again!', "ERROR")
-        // });
         fetchDataApi().then((response) => {
             apiDispatch({ type: "SUCCESS", payload: response })
             notify(response, "SUCCESS");

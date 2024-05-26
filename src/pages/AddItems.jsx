@@ -5,7 +5,6 @@ import notification from '../utils/notification';
 import { ApiContext } from '../context/context';
 import { addItemApi } from '../service/apiService';
 import Loading from '../utils/loading';
-import { fakeApi } from '../utils/fakeApi';
 
 function AddItems() {
 
@@ -30,15 +29,6 @@ function AddItems() {
     const handleSubmit = (e) => {
         e.preventDefault();
         apiDispatch({ type: "REQUEST" });
-        // fakeApi().then((response) => {
-        //     console.log(response)
-        //     apiDispatch({ type: "SUCCESS", payload: response })
-        //     notify(response, "SUCCESS");
-        // }).catch((error) => {
-        //     apiDispatch({ type: "ERROR", payload: error })
-        //     notify('Error, Please try again!', "ERROR")
-        //     apiDispatch({ type: "ERROR", payload: null })
-        // });
         addItemApi(formData).then((response) => {
             console.log(response)
             apiDispatch({ type: "SUCCESS", payload: response })
