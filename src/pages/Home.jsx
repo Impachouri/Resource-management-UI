@@ -22,7 +22,7 @@ const Home = () => {
     const fetchData = () => {
         apiDispatch({ type: "REQUEST" });
         fetchDataApi().then((response) => {
-            apiDispatch({ type: "SUCCESS", payload: response })
+            apiDispatch({ type: "SUCCESS", payload: response.data })
             notify(response, "SUCCESS");
         }).catch((error) => {
             apiDispatch({ type: "ERROR", payload: error })
@@ -48,13 +48,18 @@ const Home = () => {
         setCurrentPage(1);
     };
 
-    const activeData = apiState.data?.filter(card =>
+    const handleActiveTab = (tab) => {
+        setActiveTab(tab)
+        setCurrentPage(1);
+    }
+
+    const activeData = apiState.data.filter(card =>
         card.tag.toLowerCase().includes(activeTab)
     )
 
     const filteredData = activeData.filter(card =>
         card.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    )
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -72,13 +77,13 @@ const Home = () => {
             {/* User tab */}
             <div className="w-full h-12 flex items-center justify-center">
                 <div className="w-[60%] h-full flex border border-borderColor rounded-md font-semibold text-xl">
-                    <button onClick={() => setActiveTab('')} className={`h-full flex-1 p-2 border-r border-borderColor rounded-l-md ${activeTab === "" ? "bg-secnodaryButton text-white" : "bg-[#D7DFE93D]"} `}>
+                    <button onClick={() => handleActiveTab('')} className={`h-full flex-1 p-2 border-r border-borderColor rounded-l-md ${activeTab === "" ? "bg-secnodaryButton text-white" : "bg-[#D7DFE93D]"} `}>
                         Resource
                     </button>
-                    <button onClick={() => setActiveTab('request')} className={`h-full flex-1 p-2 border-r border-borderColor  ${activeTab === "request" ? "bg-secnodaryButton text-white" : "bg-[#D7DFE93D]"}`}>
+                    <button onClick={() => handleActiveTab('request')} className={`h-full flex-1 p-2 border-r border-borderColor  ${activeTab === "request" ? "bg-secnodaryButton text-white" : "bg-[#D7DFE93D]"}`}>
                         Request
                     </button>
-                    <button onClick={() => setActiveTab('user')} className={`h-full flex-1 p-2 ${activeTab === "user" ? "bg-secnodaryButton text-white" : "bg-[#D7DFE93D]"}`}>
+                    <button onClick={() => handleActiveTab('user')} className={`h-full flex-1 p-2 ${activeTab === "user" ? "bg-secnodaryButton text-white" : "bg-[#D7DFE93D]"}`}>
                         User
                     </button>
                 </div>

@@ -30,9 +30,9 @@ function AddItems() {
         e.preventDefault();
         apiDispatch({ type: "REQUEST" });
         addItemApi(formData).then((response) => {
-            console.log(response)
-            apiDispatch({ type: "SUCCESS", payload: response })
-            notify(response, "SUCCESS");
+            console.log(response.data)
+            apiDispatch({ type: "SUCCESS", payload: [] })
+            notify("Successfully Added", "SUCCESS");
         }).catch((error) => {
             apiDispatch({ type: "ERROR", payload: error })
             notify('Error, Please try again!', "ERROR")
