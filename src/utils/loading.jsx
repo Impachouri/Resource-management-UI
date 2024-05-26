@@ -3,7 +3,7 @@ const Loading = () => {
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
             <svg width="82" height="40" viewBox="0 0 82 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_2_135)">
+                <g clipPath="url(#clip0_2_135)">
                     <path d="M64.6163 22.6642H56.7898C55.0233 22.6642 53.5945 24.1127 53.5945 25.9103V36.5948C53.5945 38.3851 55.0233 39.8409 56.7898 39.8409H64.6163C66.3827 39.8409 67.8117 38.3926 67.8117 36.5948V25.903C67.8189 24.1127 66.3827 22.6642 64.6163 22.6642ZM64.3865 27.9846H59.4896V29.8989H64.1496V32.2133H59.4896V34.5132H64.3865V36.8059H57.0267V25.692H64.3937V27.9846H64.3865Z" fill="#002A4B" />
                     <path d="M31.285 22.6642H28.4917L21.4478 39.8336H25.6053L26.6968 36.9295H33.0658L34.1571 39.8336H38.3146L31.285 22.6642ZM28.025 33.3778L29.8992 28.4286L31.7446 33.3778H28.025Z" fill="#002A4B" />
                     <path d="M52.0364 22.6646L45.2293 39.8338H42.436L35.6075 22.6646H39.8153L43.8435 33.4071L47.807 22.6646H52.0364Z" fill="#002A4B" />
@@ -28,42 +28,42 @@ const Loading = () => {
                 <defs>
                     <linearGradient id="paint0_linear_2_135" x1="24.6125" y1="6.19814" x2="32.2605" y2="0.303116" gradientUnits="userSpaceOnUse">
                         <stop />
-                        <stop offset="0.0702074" stop-opacity="0.9298" />
-                        <stop offset="1" stop-opacity="0" />
+                        <stop offset="0.0702074" stopOpacity="0.9298" />
+                        <stop offset="1" stopOpacity="0" />
                     </linearGradient>
                     <linearGradient id="paint1_linear_2_135" x1="32.0078" y1="17.1916" x2="24.5386" y2="11.0084" gradientUnits="userSpaceOnUse">
-                        <stop stop-opacity="0" />
-                        <stop offset="0.9298" stop-opacity="0.9298" />
+                        <stop stopOpacity="0" />
+                        <stop offset="0.9298" stopOpacity="0.9298" />
                         <stop offset="1" />
                     </linearGradient>
                     <linearGradient id="paint2_linear_2_135" x1="19.0585" y1="29.8591" x2="20.2821" y2="25.3541" gradientUnits="userSpaceOnUse">
-                        <stop stop-opacity="0" />
+                        <stop stopOpacity="0" />
                         <stop offset="1" />
                     </linearGradient>
                     <linearGradient id="paint3_linear_2_135" x1="39.6931" y1="8.28463" x2="39.6931" y2="3.54711" gradientUnits="userSpaceOnUse">
-                        <stop stop-opacity="0" />
-                        <stop offset="0.9298" stop-opacity="0.9298" />
+                        <stop stopOpacity="0" />
+                        <stop offset="0.9298" stopOpacity="0.9298" />
                         <stop offset="1" />
                     </linearGradient>
                     <linearGradient id="paint4_linear_2_135" x1="12.1866" y1="16.7719" x2="12.1866" y2="4.59208" gradientUnits="userSpaceOnUse">
                         <stop />
-                        <stop offset="0.0702074" stop-opacity="0.9298" />
-                        <stop offset="1" stop-opacity="0" />
+                        <stop offset="0.0702074" stopOpacity="0.9298" />
+                        <stop offset="1" stopOpacity="0" />
                     </linearGradient>
                     <linearGradient id="paint5_linear_2_135" x1="1.90778" y1="0.430462" x2="1.90778" y2="12.6103" gradientUnits="userSpaceOnUse">
                         <stop />
-                        <stop offset="0.0702074" stop-opacity="0.9298" />
-                        <stop offset="1" stop-opacity="0" />
+                        <stop offset="0.0702074" stopOpacity="0.9298" />
+                        <stop offset="1" stopOpacity="0" />
                     </linearGradient>
                     <linearGradient id="paint6_linear_2_135" x1="26.691" y1="35.1524" x2="33.0575" y2="35.1524" gradientUnits="userSpaceOnUse">
                         <stop />
-                        <stop offset="0.0702074" stop-opacity="0.9298" />
-                        <stop offset="1" stop-opacity="0" />
+                        <stop offset="0.0702074" stopOpacity="0.9298" />
+                        <stop offset="1" stopOpacity="0" />
                     </linearGradient>
                     <linearGradient id="paint7_linear_2_135" x1="43.7398" y1="33.6784" x2="49.7769" y2="31.1503" gradientUnits="userSpaceOnUse">
                         <stop />
-                        <stop offset="0.0702074" stop-opacity="0.9298" />
-                        <stop offset="1" stop-opacity="0" />
+                        <stop offset="0.0702074" stopOpacity="0.9298" />
+                        <stop offset="1" stopOpacity="0" />
                     </linearGradient>
                     <clipPath id="clip0_2_135">
                         <rect width="82" height="40" fill="white" />

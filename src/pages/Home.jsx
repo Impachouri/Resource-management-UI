@@ -4,7 +4,7 @@ import notification from '../utils/notification';
 import { ApiContext } from '../context/context';
 import { fetchDataApi } from '../service/apiService';
 import Loading from "../utils/loading";
-import { fakeApi } from "../utils/fakeApi";
+// import { fakeApi } from "../utils/fakeApi";
 
 const Home = () => {
 
@@ -21,20 +21,20 @@ const Home = () => {
 
     const fetchData = () => {
         apiDispatch({ type: "REQUEST" });
-        fakeApi().then((response) => {
-            apiDispatch({ type: "SUCCESS", payload: response })
-            notify(response, "SUCCESS");
-        }).catch((error) => {
-            apiDispatch({ type: "ERROR", payload: error })
-            notify('Error in Loading Data, Please try again!', "ERROR")
-        });
-        // fetchDataApi().then((response) => {
+        // fakeApi().then((response) => {
         //     apiDispatch({ type: "SUCCESS", payload: response })
         //     notify(response, "SUCCESS");
         // }).catch((error) => {
         //     apiDispatch({ type: "ERROR", payload: error })
-        //     notify('Error in Loading Data, Please try again.', "ERROR")
+        //     notify('Error in Loading Data, Please try again!', "ERROR")
         // });
+        fetchDataApi().then((response) => {
+            apiDispatch({ type: "SUCCESS", payload: response })
+            notify(response, "SUCCESS");
+        }).catch((error) => {
+            apiDispatch({ type: "ERROR", payload: error })
+            notify('Error in Loading Data, Please try again.', "ERROR")
+        });
     }
 
     const handleNextPage = () => {
@@ -96,7 +96,7 @@ const Home = () => {
                     <label className="relative">
                         <span className="absolute inset-y-0 left-1 top-2 flex items-center justify-center pl-2">
                             <svg className="h-6 w-6 fill-slate-300" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.05888 4.77944C8.05888 6.59063 6.59063 8.05888 4.77944 8.05888C2.96826 8.05888 1.5 6.59063 1.5 4.77944C1.5 2.96826 2.96826 1.5 4.77944 1.5C6.59063 1.5 8.05888 2.96826 8.05888 4.77944ZM7.58708 8.64771C6.79881 9.22083 5.8286 9.55888 4.77944 9.55888C2.13983 9.55888 0 7.41905 0 4.77944C0 2.13983 2.13983 0 4.77944 0C7.41905 0 9.55888 2.13983 9.55888 4.77944C9.55888 5.82859 9.22084 6.79878 8.64773 7.58704L12.001 10.9403L10.9403 12.001L7.58708 8.64771Z" fill="#171F46" />
+                                <path fillRule="evenodd" clipRule="evenodd" d="M8.05888 4.77944C8.05888 6.59063 6.59063 8.05888 4.77944 8.05888C2.96826 8.05888 1.5 6.59063 1.5 4.77944C1.5 2.96826 2.96826 1.5 4.77944 1.5C6.59063 1.5 8.05888 2.96826 8.05888 4.77944ZM7.58708 8.64771C6.79881 9.22083 5.8286 9.55888 4.77944 9.55888C2.13983 9.55888 0 7.41905 0 4.77944C0 2.13983 2.13983 0 4.77944 0C7.41905 0 9.55888 2.13983 9.55888 4.77944C9.55888 5.82859 9.22084 6.79878 8.64773 7.58704L12.001 10.9403L10.9403 12.001L7.58708 8.64771Z" fill="#171F46" />
                             </svg>
                         </span>
                         <input value={searchQuery}

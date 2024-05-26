@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const apiInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL,
-  timeout: 5000,
+  baseURL: "https://media-content.ccbp.in/website/react-assignment/",
+  // timeout: 5000,
   headers: {
     Accept: "application/json",
   },
