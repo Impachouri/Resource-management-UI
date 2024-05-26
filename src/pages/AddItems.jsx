@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FormField from '../component/FormField';
 import notification from '../utils/notification';
+import { ApiContext } from '../context/context';
+import { addItemApi } from '../service/apiService';
 
 function AddItems() {
+
+    const { apiDispatch } = useContext(ApiContext);
+
     const [formData, setFormData] = useState({
         title: "Nickelson and Sons",
         icon_url: "http://loremflickr.com/640/480",
@@ -22,7 +27,16 @@ function AddItems() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        notify("This is test", "SUCCESS");
+        apiDispatch({ type: "Request" });
+        addItemApi(formData).then((response) => {
+            console.log(response)
+            apiDispatch({ type: "SUCCESS", payload: response })
+            notify(response, "SUCCESS");
+        }).catch((error) => {
+            apiDispatch({ type: "ERROR", payload: error })
+            notify('Error, Please try again!', "ERROR")
+            apiDispatch({ type: "ERROR", payload: null })
+        });
     }
 
     return (
@@ -34,7 +48,7 @@ function AddItems() {
                         Users
                     </Link>
                 </div>
-                <div className="flex-1 flex flex-col items-center py-6 px-6 md:px-72 gap-4">
+                <div className="flex-1 flex flex-col items-center py-6 px-6 md:px-36 lg:px-72 gap-4">
                     <h2 className="text-2xl font-normal font-rubik">Item Details</h2>
                     <form onSubmit={handleSubmit} className="w-full flex flex-col gap-5">
                         <FormField id="title" label="ITEM TITLE" type="text" name="title" value={formData.title} onChange={handleChange} />
@@ -43,7 +57,7 @@ function AddItems() {
                         <FormField id="description" label="DESCRIPTION" type="text" name="description" value={formData.description} onChange={handleChange} />
                         <FormField id="category" label="CATEGORY" type="text" name="category" value={formData.category} onChange={handleChange} />
                         <FormField id="tag" label="TAG" type="text" name="tag" value={formData.tag} onChange={handleChange} />
-                        <button className="bg-secnodaryButton text-white font-semibold text-sm py-2 mt-4">CREATE</button>
+                        <button className="bg-secnodaryButton w-1/4 self-center text-white font-semibold text-sm py-2 mt-4">CREATE</button>
                     </form>
                 </div>
             </div>
