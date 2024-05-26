@@ -67,7 +67,7 @@ function AddItems() {
                 </div>
             </div>
             <div className="h-full md:w-1/2 md:block hidden">
-                <img className="h-full w-full object-cover object-center" src="login.svg" alt="login" />
+                <img className="h-full w-full object-cover object-center" src="./Resource-management-UI/login.png" alt="login" />
             </div>
         </div>
     );
