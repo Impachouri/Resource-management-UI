@@ -32,7 +32,7 @@ const Home = () => {
 
     const filteredData = useMemo(() => {
         return apiState.data
-            .filer(card => card.tag.toLowerCase().includes(activeTab))
+            .filter(card => card.tag.toLowerCase().includes(activeTab))
             .filter(card => card.title.toLowerCase().includes(searchQuery.toLowerCase()));
     }, [apiState.data, activeTab, searchQuery]);
 
