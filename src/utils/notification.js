@@ -9,7 +9,7 @@ const notification = () => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "light",
+    theme: "colored",
   };
   return (message, type) => {
     switch (type) {

@@ -1,47 +1,36 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Formik, Form } from 'formik';
 import FormField from '../component/FormField';
 import notification from '../utils/notification';
 import { ApiContext } from '../context/context';
 import { addItemApi } from '../service/apiService';
 import Loading from '../utils/loading';
+import { validationSchema } from '../utils/validationSchema';
+import { initialValues } from '../utils/initialValues';
+import FormButton from '../component/FormButton';
 
 function AddItems() {
-
     const { apiState, apiDispatch } = useContext(ApiContext);
-
-    const [formData, setFormData] = useState({
-        title: "Nickelson and Sons",
-        icon_url: "http://loremflickr.com/640/480",
-        link: "https://gaseous-pod.net",
-        description: "Eligendi cum eligendi nemo accusamus natus vero dolor.",
-        category: "Automotive",
-        tag: "request",
-    });
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
     const notify = notification();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        apiDispatch({ type: "REQUEST" });
-        addItemApi(formData).then((response) => {
-            console.log(response.data)
-            apiDispatch({ type: "SUCCESS", payload: [] })
+    const handleSubmit = async (values, { setSubmitting }) => {
+        try {
+            apiDispatch({ type: "REQUEST" });
+            await addItemApi(values);
+            apiDispatch({ type: "SUCCESS", payload: [] });
             notify("Successfully Added", "SUCCESS");
-        }).catch((error) => {
-            apiDispatch({ type: "ERROR", payload: error })
-            notify('Error, Please try again!', "ERROR")
-            apiDispatch({ type: "ERROR", payload: null })
-        });
-    }
+        } catch (error) {
+            apiDispatch({ type: "ERROR", payload: error });
+            notify('Error, Please try again!', "ERROR");
+            apiDispatch({ type: "ERROR", payload: null });
+        } finally {
+            setSubmitting(false);
+        }
+    };
 
     if (apiState.loading) {
-        return <Loading />
+        return <Loading />;
     }
 
     return (
@@ -55,15 +44,27 @@ function AddItems() {
                 </div>
                 <div className="flex-1 flex flex-col items-center py-6 px-6 md:px-36 lg:px-72 gap-4">
                     <h2 className="text-2xl font-normal font-rubik">Item Details</h2>
-                    <form onSubmit={handleSubmit} className="w-full flex flex-col gap-5">
-                        <FormField id="title" label="ITEM TITLE" type="text" name="title" value={formData.title} onChange={handleChange} />
-                        <FormField id="icon_url" label="ICON URL" type="text" name="icon_url" value={formData.icon_url} onChange={handleChange} />
-                        <FormField id="link" label="LINK" type="text" name="link" value={formData.link} onChange={handleChange} />
-                        <FormField id="description" label="DESCRIPTION" type="text" name="description" value={formData.description} onChange={handleChange} />
-                        <FormField id="category" label="CATEGORY" type="text" name="category" value={formData.category} onChange={handleChange} />
-                        <FormField id="tag" label="TAG" type="text" name="tag" value={formData.tag} onChange={handleChange} />
-                        <button className="bg-secnodaryButton w-1/4 self-center text-white font-semibold text-sm py-2 mt-4">CREATE</button>
-                    </form>
+                    <Formik
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={handleSubmit}
+                    >
+                        {({ isSubmitting }) => (
+                            <Form className="w-full flex flex-col gap-5">
+                                <FormField id="title" label="ITEM TITLE" name="title" />
+                                <FormField id="icon_url" label="ICON URL" name="icon_url" />
+                                <FormField id="link" label="LINK" name="link" />
+                                <FormField id="description" label="DESCRIPTION" name="description" />
+                                <FormField id="category" label="CATEGORY" name="category" />
+                                <FormField id="tag" label="TAG" name="tag" as="select">
+                                    <option value="" label="Select tag" />
+                                    <option value="user" label="User" />
+                                    <option value="request" label="Request" />
+                                </FormField>
+                                <FormButton isSubmitting={isSubmitting}>CREATE</FormButton>
+                            </Form>
+                        )}
+                    </Formik>
                 </div>
             </div>
             <div className="h-full md:w-1/2 md:block hidden">
